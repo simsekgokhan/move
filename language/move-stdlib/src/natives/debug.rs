@@ -41,13 +41,13 @@ fn native_print(
     let _ty = ty_args.pop().unwrap();
 
     // No-op if the feature flag is not present.
-    #[cfg(feature = "testing")]
+    // #[cfg(feature = "testing")] //////// 0L ////////
     {
         let canonical = false;
         let single_line = false;
         let include_int_types = false;
 
-        let mut out = "[debug] ".to_string();
+        let mut out = "[move print] ".to_string(); //////// 0L ////////
         let val = _val.value_as::<Reference>()?.read_ref()?;
 
         testing::print_value(
