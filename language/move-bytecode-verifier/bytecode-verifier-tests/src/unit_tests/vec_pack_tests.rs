@@ -62,14 +62,16 @@ fn test_vec_pack() {
     let res = move_bytecode_verifier::verify_module_with_config(
         &VerifierConfig {
             max_loop_depth: Some(5),
-            treat_friend_as_private: true,
             max_generic_instantiation_length: Some(32),
             max_function_parameters: Some(128),
             max_basic_blocks: Some(1024),
             max_value_stack_size: 1024,
             max_type_nodes: Some(256),
             max_push_size: Some(10000),
-            max_dependency_depth: 100,
+            max_dependency_depth: Some(100),
+            max_struct_definitions: Some(200),
+            max_fields_in_struct: Some(30),
+            max_function_definitions: Some(1000),
         },
         &m,
     )

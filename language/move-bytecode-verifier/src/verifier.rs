@@ -20,14 +20,16 @@ use move_binary_format::{
 #[derive(Debug, Clone)]
 pub struct VerifierConfig {
     pub max_loop_depth: Option<usize>,
-    pub treat_friend_as_private: bool,
     pub max_function_parameters: Option<usize>,
     pub max_generic_instantiation_length: Option<usize>,
     pub max_basic_blocks: Option<usize>,
     pub max_value_stack_size: usize,
     pub max_type_nodes: Option<usize>,
     pub max_push_size: Option<usize>,
-    pub max_dependency_depth: u64,
+    pub max_dependency_depth: Option<usize>,
+    pub max_struct_definitions: Option<usize>,
+    pub max_fields_in_struct: Option<usize>,
+    pub max_function_definitions: Option<usize>,
 }
 
 /// Helper for a "canonical" verification of a module.
@@ -92,16 +94,28 @@ impl Default for VerifierConfig {
     fn default() -> Self {
         Self {
             max_loop_depth: None,
-            treat_friend_as_private: false,
             max_function_parameters: None,
             max_generic_instantiation_length: None,
             max_basic_blocks: None,
             max_type_nodes: None,
             // Max size set to 1024 to match the size limit in the interpreter.
             max_value_stack_size: 1024,
+            // Max number of pushes in one function
+            max_push_size: None,
+            // Max depth in dependency tree for both direct and friend dependencies
+            max_dependency_depth: None,
+            // Max count of structs in a module
+            max_struct_definitions: None,
+            // Max count of fields in a struct
+            max_fields_in_struct: None,
+            // Max count of functions in a module
+            max_function_definitions: None,
             // Max size set to 10000 to restrict number of pushes in one function
-            max_push_size: Some(10000),
-            max_dependency_depth: 100,
+            // max_push_size: Some(10000),
+            // max_dependency_depth: Some(100),
+            // max_struct_definitions: Some(200),
+            // max_fields_in_struct: Some(30),
+            // max_function_definitions: Some(1000),
         }
     }
 }
