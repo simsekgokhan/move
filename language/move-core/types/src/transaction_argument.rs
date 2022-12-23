@@ -19,6 +19,9 @@ pub enum TransactionArgument {
     U16(u16),
     U32(u32),
     U256(u256::U256),
+    // TODO(0L): AddressVector is not implemented anywhere. 
+    //           Though there were plans to include this in tx scripts.
+    AddressVector(Vec<AccountAddress>), //////// 0L ////////    
 }
 
 impl fmt::Debug for TransactionArgument {
@@ -35,6 +38,10 @@ impl fmt::Debug for TransactionArgument {
             TransactionArgument::U16(value) => write!(f, "{{U16: {}}}", value),
             TransactionArgument::U32(value) => write!(f, "{{U32: {}}}", value),
             TransactionArgument::U256(value) => write!(f, "{{U256: {}}}", value),
+            //////// 0L ////////
+            TransactionArgument::AddressVector(vector) => {
+                write!(f, "{{AddressVector: {:?}}}", vector)
+            }                        
         }
     }
 }
@@ -51,6 +58,8 @@ impl From<TransactionArgument> for MoveValue {
             TransactionArgument::U16(i) => MoveValue::U16(i),
             TransactionArgument::U32(i) => MoveValue::U32(i),
             TransactionArgument::U256(i) => MoveValue::U256(i),
+            //////// 0L ////////            
+            TransactionArgument::AddressVector(v) => MoveValue::vector_address(v.clone())
         }
     }
 }
