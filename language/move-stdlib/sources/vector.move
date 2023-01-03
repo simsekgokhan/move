@@ -124,7 +124,7 @@ module std::vector {
             if (borrow(v, i) == e) return (true, i);
             i = i + 1;
         };
-        (false, 0)
+        (false, 99)
     }
     spec index_of {
         pragma intrinsic = true;
