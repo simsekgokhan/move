@@ -693,6 +693,10 @@ fn call_native_function(
         ("event", "write_to_event_store") => (),
         ("hash", "sha3_256") | ("hash", "sha2_256") => (),
         ("Signature", "ed25519_validate_pubkey") | ("Signature", "ed25519_verify") => (),
+        /////// 0L /////////
+        ("VDF", "verify") | ("VDF", "extract_address_from_challenge") => (),
+        ("Debug", "print") => (),
+        
         (m, f) => {
             panic!("Unsupported native function {:?}::{:?}", m, f)
         }

@@ -15,6 +15,9 @@ pub mod vector;
 
 mod helpers;
 
+//////// 0L ////////
+pub mod ol_vdf;
+
 use move_core_types::account_address::AccountAddress;
 use move_vm_runtime::native_functions::{make_table_from_iter, NativeFunctionTable};
 
