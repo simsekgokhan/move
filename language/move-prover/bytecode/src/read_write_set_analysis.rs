@@ -695,8 +695,8 @@ fn call_native_function(
         ("Signature", "ed25519_validate_pubkey") | ("Signature", "ed25519_verify") => (),
         /////// 0L /////////
         ("VDF", "verify") | ("VDF", "extract_address_from_challenge") => (),
-        ("Debug", "print") => (),
-        
+        ("ol_debug", "print") | ("ol_debug", "print_stack_trace") => (),
+
         (m, f) => {
             panic!("Unsupported native function {:?}::{:?}", m, f)
         }

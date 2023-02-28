@@ -17,6 +17,7 @@ mod helpers;
 
 //////// 0L ////////
 pub mod ol_vdf;
+pub mod ol_debug;
 
 use move_core_types::account_address::AccountAddress;
 use move_vm_runtime::native_functions::{make_table_from_iter, NativeFunctionTable};
@@ -32,6 +33,7 @@ pub struct GasParameters {
 
     //////// 0L ////////
     pub ol_vdf: ol_vdf::GasParameters,
+    pub ol_debug: ol_debug::GasParameters,
 
     #[cfg(feature = "testing")]
     pub unit_test: unit_test::GasParameters,
@@ -113,6 +115,14 @@ impl GasParameters {
                     base: 0.into(),
                 },
             },
+            ol_debug: ol_debug::GasParameters {
+                print: ol_debug::PrintGasParameters {
+                    base_cost: 0.into(),
+                },
+                print_stack_trace: ol_debug::PrintStackTraceGasParameters {
+                    base_cost: 0.into(),
+                },
+            },
         }
     }
 }
@@ -139,6 +149,7 @@ pub fn all_natives(
     add_natives!("vector", vector::make_all(gas_params.vector));
     //////// 0L ////////
     add_natives!("ol_vdf", ol_vdf::make_all(gas_params.ol_vdf));
+    add_natives!("ol_debug", ol_debug::make_all(gas_params.ol_debug, move_std_addr));
 
     #[cfg(feature = "testing")]
     {
