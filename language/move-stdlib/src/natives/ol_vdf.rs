@@ -40,7 +40,7 @@ pub struct VerifyGasParameters {
 /// Rust implementation of Move's `native public fun verify(challenge: vector<u8>, 
 /// difficulty: u64, alleged_solution: vector<u8>): bool`
 pub fn native_verify(
-    _gas_params: &VerifyGasParameters,
+    gas_params: &VerifyGasParameters,
     _context: &mut NativeContext,
     _ty_args: Vec<Type>,
     mut arguments: VecDeque<Value>,
@@ -75,10 +75,6 @@ pub fn native_verify(
         );
     }
 
-    // TODO change the `cost_index` when we have our own cost table.
-    // let cost = native_gas(context.cost_table(), NativeCostIndex::VDF_VERIFY, 1);
-    let cost = todo!();
-
     let v = vdf::PietrzakVDFParams(security as u16).new();
     let result = v.verify(&challenge, difficulty, &solution);
 
@@ -88,7 +84,8 @@ pub fn native_verify(
     // let latency = start_time.elapsed();
     // metric_timer.observe_duration(); // 0L todo
     // dbg!("vdf verification latency", &latency);
-    
+
+    let cost = gas_params.base; // 0L todo
     Ok(NativeResult::ok(cost, return_values))
 }
 
@@ -116,7 +113,7 @@ pub struct ExtractAddressFromChallengeGasParameters {
 // Auth Keys can be turned into an AccountAddress type, to be serialized to 
 // a move address type.
 pub fn native_extract_address_from_challenge(
-    _gas_params: &ExtractAddressFromChallengeGasParameters,
+    gas_params: &ExtractAddressFromChallengeGasParameters,
     _context: &mut NativeContext,
     _ty_args: Vec<Type>,
     mut arguments: VecDeque<Value>,
@@ -137,8 +134,7 @@ pub fn native_extract_address_from_challenge(
     let return_values = smallvec![
         Value::address(address), Value::vector_u8(auth_key_vec[..16].to_owned())
     ];
-    // let cost = native_gas(context.cost_table(), NativeCostIndex::VDF_PARSE, 1);
-    let cost = todo!();
+    let cost = gas_params.base; // 0L todo
     Ok(NativeResult::ok(cost, return_values))
 }
 
