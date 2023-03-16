@@ -50,17 +50,18 @@ fn native_print(
         let mut out = "[move print] ".to_string(); //////// 0L ////////
         let val = _val.value_as::<Reference>()?.read_ref()?;
 
-        testing::print_value(
-            _context,
-            &mut out,
-            val,
-            _ty,
-            &_move_std_addr,
-            0,
-            canonical,
-            single_line,
-            include_int_types,
-        )?;
+        //////// 0L ////////
+        // testing::print_value(
+        //     _context,
+        //     &mut out,
+        //     val,
+        //     _ty,
+        //     &_move_std_addr,
+        //     0,
+        //     canonical,
+        //     single_line,
+        //     include_int_types,
+        // )?;
         println!("{}", out);
     }
 
