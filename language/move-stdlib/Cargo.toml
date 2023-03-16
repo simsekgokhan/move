@@ -32,7 +32,7 @@ hex = "0.4.3"
 vdf = { git = "https://github.com/OLSF/libra", rev = "6106c0730b9953cb8021b5dfc33f9e48cf578a34" }
 rust_decimal= { version = "1.10.3", default-features = true, features = ["maths"] }
 tiny-keccak = { version = "2.0.2", features = ["keccak"] }
-ethers = {version = "2.0"}
+# ethers = {version = "0.5.3"} # 0L v7 todo
 # diem-metrics = { git = "https://github.com/OLSF/libra", rev = "6106c0730b9953cb8021b5dfc33f9e48cf578a34" }
 once_cell = "1.7.2"
 
