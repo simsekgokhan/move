@@ -27,7 +27,7 @@ atty = "0.2.14"
 clap = { version = "3.1.8", features = ["derive"] }
 codespan = "0.11.1"
 codespan-reporting = "0.11.1"
-futures = "0.3.12"
+futures = "0.3.24"
 hex = "0.4.3"
 itertools = "0.10.0"
 log = { version = "0.4.14", features = ["serde"] }
